@@ -1,0 +1,15 @@
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\bin\Debug\net10.0\ProyectoGestorFotos.exe
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\bin\Debug\net10.0\ProyectoGestorFotos.deps.json
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\bin\Debug\net10.0\ProyectoGestorFotos.runtimeconfig.json
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\bin\Debug\net10.0\ProyectoGestorFotos.dll
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\bin\Debug\net10.0\ProyectoGestorFotos.pdb
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\obj\Debug\net10.0\ProyectoGestorFotos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\obj\Debug\net10.0\ProyectoGestorFotos.AssemblyInfoInputs.cache
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\obj\Debug\net10.0\ProyectoGestorFotos.AssemblyInfo.cs
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\obj\Debug\net10.0\ProyectoGestorFotos.csproj.CoreCompileInputs.cache
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\obj\Debug\net10.0\ProyectoGestorFotos.dll
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\obj\Debug\net10.0\refint\ProyectoGestorFotos.dll
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\obj\Debug\net10.0\ProyectoGestorFotos.pdb
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\obj\Debug\net10.0\ProyectoGestorFotos.genruntimeconfig.cache
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\obj\Debug\net10.0\ref\ProyectoGestorFotos.dll
+C:\Users\Xavier Sanchez\Desktop\EETAC\IO\repos\ProyectoGestorFotos\ProyectoGestorFotos\obj\Debug\net10.0\Proyecto.CD624543.Up2Date
