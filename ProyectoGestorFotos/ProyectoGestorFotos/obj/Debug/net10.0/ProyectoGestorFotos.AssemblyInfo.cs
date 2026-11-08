@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProyectoGestorFotos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3409f936b933b47dff807c1662c517e41c3ebeda")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProyectoGestorFotos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProyectoGestorFotos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
