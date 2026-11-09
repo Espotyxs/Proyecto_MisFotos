@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\xavis\\Desktop\\BFM_Bot\\Proyecto_MisFotos\\ProyectoGestorFotos\\ProyectoGestorFotos\\ProyectoGestorFotos.csproj": {}
+    "C:\\Users\\Xavier Sanchez\\Desktop\\Proyecto_MisFotos\\ProyectoGestorFotos\\ProyectoGestorFotos\\ProyectoGestorFotos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\xavis\\Desktop\\BFM_Bot\\Proyecto_MisFotos\\ProyectoGestorFotos\\ProyectoGestorFotos\\ProyectoGestorFotos.csproj": {
+    "C:\\Users\\Xavier Sanchez\\Desktop\\Proyecto_MisFotos\\ProyectoGestorFotos\\ProyectoGestorFotos\\ProyectoGestorFotos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\xavis\\Desktop\\BFM_Bot\\Proyecto_MisFotos\\ProyectoGestorFotos\\ProyectoGestorFotos\\ProyectoGestorFotos.csproj",
+        "projectUniqueName": "C:\\Users\\Xavier Sanchez\\Desktop\\Proyecto_MisFotos\\ProyectoGestorFotos\\ProyectoGestorFotos\\ProyectoGestorFotos.csproj",
         "projectName": "ProyectoGestorFotos",
-        "projectPath": "C:\\Users\\xavis\\Desktop\\BFM_Bot\\Proyecto_MisFotos\\ProyectoGestorFotos\\ProyectoGestorFotos\\ProyectoGestorFotos.csproj",
-        "packagesPath": "C:\\Users\\xavis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\xavis\\Desktop\\BFM_Bot\\Proyecto_MisFotos\\ProyectoGestorFotos\\ProyectoGestorFotos\\obj\\",
+        "projectPath": "C:\\Users\\Xavier Sanchez\\Desktop\\Proyecto_MisFotos\\ProyectoGestorFotos\\ProyectoGestorFotos\\ProyectoGestorFotos.csproj",
+        "packagesPath": "C:\\Users\\Xavier Sanchez\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Xavier Sanchez\\Desktop\\Proyecto_MisFotos\\ProyectoGestorFotos\\ProyectoGestorFotos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\xavis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Xavier Sanchez\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

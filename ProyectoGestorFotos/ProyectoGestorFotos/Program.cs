@@ -161,15 +161,37 @@ internal class Program
             }
             else if (input == "2")
             {
+                ListaFotos nuevaLista = new ListaFotos();
                 EscribeLista(nuevaLista);
             }
             else if (input == "3")
             {
-
+                ListaFotos nuevaLista = new ListaFotos();
+                Console.WriteLine("Introduzca el nombre del album");
+                string album = Console.ReadLine();
+                EscribeLista(DameFotosAlbum(nuevaLista, album));
             }
             else if (input == "4")
             {
-
+                ListaFotos nuevaLista = new ListaFotos();
+                Foto f = new Foto();
+                Console.WriteLine("Introduzca separado por espacios la siguiente informacion");
+                Console.WriteLine("NombreFichero, fecha, album, likes");
+                input = Console.ReadLine();
+                string[] trozos = input.Split();
+                f.fichero = trozos[0];
+                f.fecha = trozos[1];
+                f.album = trozos[2];
+                f.likes = Convert.ToInt32(trozos[3]);
+                if(PonFoto(nuevaLista, f) == 0)
+                {
+                    Console.WriteLine("Se ha efectuado la operacion");
+                }
+                else
+                {
+                    Console.WriteLine("No se ha podido efectuar la operacion correctamente");
+                }
+                
             }
             else
             {
