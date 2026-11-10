@@ -69,7 +69,55 @@ internal class Program
                 return null;
             }
         }
+        static void Menu(ListaFotos nuevaLista, string input)
+        {
+            
+            if (input == "0")
+            {
 
+            }
+            else if (input == "1")
+            {
+                Console.WriteLine("Introduzca el nombre del fichero");
+                string fichero = Console.ReadLine();
+                CargaLista(nuevaLista, fichero);
+            }
+            else if (input == "2")
+            {
+                EscribeLista(nuevaLista);
+            }
+            else if (input == "3")
+            {
+                Console.WriteLine("Introduzca el nombre del album");
+                string album = Console.ReadLine();
+                EscribeLista(DameFotosAlbum(nuevaLista, album));
+            }
+            else if (input == "4")
+            {
+                Foto f = new Foto();
+                Console.WriteLine("Introduzca separado por espacios la siguiente informacion");
+                Console.WriteLine("NombreFichero, fecha, album, likes");
+                input = Console.ReadLine();
+                string[] trozos = input.Split();
+                f.fichero = trozos[0];
+                f.fecha = trozos[1];
+                f.album = trozos[2];
+                f.likes = Convert.ToInt32(trozos[3]);
+                if (PonFoto(nuevaLista, f) == 0)
+                {
+                    Console.WriteLine("Se ha efectuado la operacion");
+                }
+                else
+                {
+                    Console.WriteLine("No se ha podido efectuar la operacion correctamente");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Insercion incorrecta");
+            }
+        }
         static int CargaLista (ListaFotos lista, string nombreFichero)
         {
             try
@@ -140,62 +188,19 @@ internal class Program
             lista.biblioteca[lista.num] = f;
             EscribeFoto(f);
             */
-
-            Console.WriteLine("Introduzca la accion que quiere realizar");
-            Console.WriteLine("0 - Salir del Programa");
-            Console.WriteLine("1 - Cargar una lista de fotos con los datos de un fichero cuyo nombre introduce el usuario por teclado");
-            Console.WriteLine("2 - Escribir en consola los datos de todas las fotos de la lista");
-            Console.WriteLine("3 - Escribir en consola los datos de las fotos pertenecientes a un álbum cuyo nombre introduce el usuario por teclado");
-            Console.WriteLine("4 - Añadir a la lista una foto cuyos datos introduce el usuario por teclado");
-            string input = Console.ReadLine();
-            if (input == "0")
+            ListaFotos generica = new ListaFotos();
+            string input = "";
+            while (input != "0")
             {
-
-            }
-            else if (input == "1")
-            {
-                ListaFotos nuevaLista = new ListaFotos();
-                Console.WriteLine("Introduzca el nombre del fichero");
-                string fichero = Console.ReadLine();
-                CargaLista(nuevaLista, fichero);
-            }
-            else if (input == "2")
-            {
-                ListaFotos nuevaLista = new ListaFotos();
-                EscribeLista(nuevaLista);
-            }
-            else if (input == "3")
-            {
-                ListaFotos nuevaLista = new ListaFotos();
-                Console.WriteLine("Introduzca el nombre del album");
-                string album = Console.ReadLine();
-                EscribeLista(DameFotosAlbum(nuevaLista, album));
-            }
-            else if (input == "4")
-            {
-                ListaFotos nuevaLista = new ListaFotos();
-                Foto f = new Foto();
-                Console.WriteLine("Introduzca separado por espacios la siguiente informacion");
-                Console.WriteLine("NombreFichero, fecha, album, likes");
+                Console.WriteLine("Introduzca la accion que quiere realizar");
+                Console.WriteLine("0 - Salir del Programa");
+                Console.WriteLine("1 - Cargar una lista de fotos con los datos de un fichero cuyo nombre introduce el usuario por teclado");
+                Console.WriteLine("2 - Escribir en consola los datos de todas las fotos de la lista");
+                Console.WriteLine("3 - Escribir en consola los datos de las fotos pertenecientes a un álbum cuyo nombre introduce el usuario por teclado");
+                Console.WriteLine("4 - Añadir a la lista una foto cuyos datos introduce el usuario por teclado");
                 input = Console.ReadLine();
-                string[] trozos = input.Split();
-                f.fichero = trozos[0];
-                f.fecha = trozos[1];
-                f.album = trozos[2];
-                f.likes = Convert.ToInt32(trozos[3]);
-                if(PonFoto(nuevaLista, f) == 0)
-                {
-                    Console.WriteLine("Se ha efectuado la operacion");
-                }
-                else
-                {
-                    Console.WriteLine("No se ha podido efectuar la operacion correctamente");
-                }
-                
-            }
-            else
-            {
-                Console.WriteLine("Insercion incorrecta");
+                Menu(generica, input);
+
             }
         }
     }
