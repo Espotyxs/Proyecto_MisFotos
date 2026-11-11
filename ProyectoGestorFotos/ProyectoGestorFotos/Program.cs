@@ -13,9 +13,31 @@
     }
 internal class Program
     {
+        static int HazLike (ListaFotos Lista, string ficheroImagen)
+        {
+
+        }
+        static Foto DameFavorita(ListaFotos lista)
+        {
+            int pos = 0;
+            int max = 0;
+            int i = 0;
+            Foto f = new Foto();
+            while (i < lista.biblioteca.Length)
+            {
+                f = lista.biblioteca[i];
+                if(f.likes < max)
+                {
+                    pos = i;
+                    max = f.likes;
+                }
+                i++;
+            }
+            return f = lista.biblioteca[pos];
+        }
         static void EscribeFoto(Foto foto)
         {
-            Console.WriteLine(foto.fichero +" "+ foto.fecha +" "+ foto.album + " " + foto.likes);
+            Console.WriteLine("Fichero: "+foto.fichero +" Fecha: "+ foto.fecha +" Album: "+ foto.album + " Likes: " + foto.likes);
         }
         static int PonFoto (ListaFotos lista, Foto foto)
         {
@@ -37,7 +59,7 @@ internal class Program
             while (i < lista.biblioteca.Length)
             {
                foto = lista.biblioteca[i];
-               Console.WriteLine(foto.fichero + " " + foto.fecha + " " + foto.album + " " + foto.likes);
+               Console.WriteLine("Fichero :"+foto.fichero + " Fecha: " + foto.fecha + " Album: " + foto.album + " Likes: " + foto.likes);
                 i++;
             }
         }
@@ -80,7 +102,15 @@ internal class Program
             {
                 Console.WriteLine("Introduzca el nombre del fichero");
                 string fichero = Console.ReadLine();
-                CargaLista(nuevaLista, fichero);
+                int e = CargaLista(nuevaLista, fichero);
+                if (e == 0)
+                {
+                    Console.WriteLine("Se ha efectuado con exito");
+                }
+                if (e == -1)
+                {
+                    Console.WriteLine("No hay espacio en la lista");
+                }
             }
             else if (input == "2")
             {
