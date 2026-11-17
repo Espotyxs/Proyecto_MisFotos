@@ -424,6 +424,12 @@ internal class Program
                 string fichero = Console.ReadLine();
                 SalvarLista(nuevaLista, fichero);
             }
+            else if (input == "10")
+            {
+                Console.WriteLine("Introduzca el nombre del fichero");
+                string fichero = Console.ReadLine();
+                colorHaciaGris(nuevaLista, fichero);
+            }
             else
             {
                 Console.WriteLine("Insercion incorrecta");
@@ -483,6 +489,7 @@ internal class Program
                 Console.WriteLine("7 - Mostrar al usuario la imagen de la foto identificada con el nombre del fichero que contiene su imagen, que introduce el usuario por teclado");
                 Console.WriteLine("8 - Eliminar la foto identificada con el nombre del fichero que contiene su imagen,que introduce el usuario por teclado");
                 Console.WriteLine("9 - Salvar la lista de fotos en el fichero cuyo nombre introduce el usuario por teclado");
+                Console.WriteLine("10 - Pasar foto de color a escala de grises");
                 input = Console.ReadLine();
                 Console.Clear();
                 Menu(generica, input);
