@@ -1,4 +1,8 @@
-﻿namespace ProyectoGestorFotos
+﻿using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
+using System.Diagnostics;
+namespace ProyectoGestorFotos
 {
     class Foto
     {
@@ -13,9 +17,236 @@
     }
 internal class Program
     {
-        static int HazLike (ListaFotos Lista, string ficheroImagen)
+        static void colorHaciaGris (ListaFotos lista, string nombreFichero)
         {
+            try
+            {
+                Color[,] imagen = CargaImagen(nombreFichero);
+                int altura = imagen.GetLength(0);
+                int anchura = imagen.GetLength(1);
+                for (int i = 0; i < altura; i++)
+                {
+                    for (int j = 0; j < anchura; j++)
+                    {
+                        Color pixelActual = imagen[i, j];
+                        double r = pixelActual.R;
+                        double g = pixelActual.G;
+                        double b = pixelActual.B;
 
+                        r = r * 0.299f;
+                        g = g * 0.587f;
+                        b = b * 0.114f;
+                        int enteroR = Convert.ToInt32(r);
+                        int enteroG = Convert.ToInt32(g);
+                        int enteroB = Convert.ToInt32(b);
+                        imagen[i, j] = Color.FromArgb(enteroR, enteroG, enteroB);
+                    }
+                }
+                GuardarImagen(imagen, nombreFichero);
+                Console.WriteLine("Operacion realizada con exito!");
+            }
+            catch (FileNotFoundException)
+            {
+                try
+                {
+                    nombreFichero = nombreFichero + ".jpeg";
+                    Color[,] imagen = CargaImagen(nombreFichero);
+                    int altura = imagen.GetLength(0);
+                    int anchura = imagen.GetLength(1);
+                    for (int i = 0; i < altura; i++)
+                    {
+                        for (int j = 0; j < anchura; j++)
+                        {
+                            Color pixelActual = imagen[i, j];
+                            double r = pixelActual.R;
+                            double g = pixelActual.G;
+                            double b = pixelActual.B;
+
+                            r = r * 0.299f;
+                            g = g * 0.587f;
+                            b = b * 0.114f;
+                            int enteroR = Convert.ToInt32(r);
+                            int enteroG = Convert.ToInt32(g);
+                            int enteroB = Convert.ToInt32(b);
+                            imagen[i, j] = Color.FromArgb(enteroR, enteroG, enteroB);
+                        }
+                    }
+                }
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine("No se ha encontrado el fichero");
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Formato de fichero incorrecto; Formato aceptado --> .JPEG");
+            }
+        }
+        static Bitmap CrearBitmap(Color[,] pixels)
+        {
+            int ancho = pixels.GetLength(1);
+            int alto = pixels.GetLength(0);
+            Bitmap bmp = new Bitmap(ancho, alto);
+
+            for (int y = 0; y < alto; y++)
+            {
+                for (int x = 0; x < ancho; x++)
+                {
+                    bmp.SetPixel(x, y, pixels[y, x]);
+                }
+            }
+
+            return bmp;
+        }
+        static void GuardarImagen(Color[,] pixels, string nombreFichero) //preguntar a Miguel
+        {
+            Bitmap imagen = CrearBitmap(pixels);
+            imagen.Save(nombreFichero, ImageFormat.Jpeg);
+            imagen.Dispose();
+        }
+
+        static void MuestraImagenPixels(Color[,] pixels)
+        {
+            int filas = pixels.GetLength(0);
+            int columnas = pixels.GetLength(1);
+            Bitmap imagen = new Bitmap(columnas, filas);
+            for (int fila = 0; fila < filas; fila++)
+                for (int columna = 0; columna < columnas; columna++)
+                    imagen.SetPixel(columna, fila, pixels[fila, columna]);
+            Form ventana = new Form();
+            ventana.Text = "Imagen";
+            ventana.Width = 800;
+            ventana.Height = 600;
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Dock = DockStyle.Fill;
+            pictureBox.Image = imagen;
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            ventana.Controls.Add(pictureBox);
+            Application.Run(ventana);
+            imagen.Dispose();
+        }
+
+        static Color[,] CargaImagen(string nombreFichero)
+        {
+            Bitmap imagen = new Bitmap(nombreFichero);
+            Color[,] pixels = new Color[imagen.Height, imagen.Width];
+            for (int fila = 0; fila < imagen.Height; fila++)
+                for (int columna = 0; columna < imagen.Width; columna++)
+                    pixels[fila, columna] = imagen.GetPixel(columna, fila);
+
+            imagen.Dispose();
+            return pixels;
+
+        }
+        static void SalvarLista(ListaFotos lista, string fichero)
+        {
+            try
+            {
+                StreamWriter w = new StreamWriter(fichero);
+                int i = 0;
+                while (i < lista.num)
+                {
+                    Foto f = lista.biblioteca[i];
+                    w.WriteLine("{0} {1} {2} {3}", f.fichero, f.fecha, f.album, f.likes);
+                    i++;
+                }
+                w.Close();
+                Console.WriteLine("Operacion efecutada con exito!");
+            }
+            catch (FileNotFoundException)
+            {
+                try
+                {
+                    fichero = fichero + ".txt";
+                    StreamWriter w = new StreamWriter(fichero);
+                    int i = 0;
+                    while (i < lista.num)
+                    {
+                        Foto f = lista.biblioteca[i];
+                        w.WriteLine("{0} {1} {2} {3}", f.fichero, f.fecha, f.album, f.likes);
+                        i++;
+                    }
+                    w.Close();
+                }
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine("No se ha encontrado el fichero");
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Fichero en formato incorrecto, formato aceptado --> .TXT");
+            }
+        }
+        static int EliminaFoto(ListaFotos lista, string ficheroImagen)
+        {
+            bool encontrado = false;
+            int i = 0;
+            Foto f = new Foto();
+            while (i < lista.biblioteca.Length)
+            {
+                f = lista.biblioteca[i];
+                if (!encontrado)
+                {
+                    if (f.fichero == ficheroImagen)
+                    {
+                        encontrado = true;
+                        f = lista.biblioteca[i + 1];
+                    }
+                    i++;
+                }
+                else
+                {
+                    f = lista.biblioteca[i + 1];
+                    i++;
+                }
+            }
+            if (encontrado)
+            {
+                lista.num--;
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        static int MuestraImagen (ListaFotos lista, string ficheroImagen)
+        {
+            bool encontrado = false;
+            int i = 0;
+            Foto f = new Foto();
+            while (i < lista.biblioteca.Length && !encontrado)
+            {
+                f = lista.biblioteca[i];
+                if (f.fichero == ficheroImagen)
+                {
+                    encontrado = true;
+                    Process.Start(ficheroImagen);
+                    Console.ReadKey();
+                    return 0;
+                }
+                i++;
+            }
+            return -1;
+        }
+        static int HazLike (ListaFotos lista, string ficheroImagen)
+        {
+            bool encontrado = false;
+            int i = 0;
+            Foto f = new Foto();
+            while (i < lista.biblioteca.Length && !encontrado)
+            {
+                f = lista.biblioteca[i];
+                if (f.fichero == ficheroImagen)
+                {
+                    f.likes = f.likes + 1;
+                    encontrado = true;
+                    return 0;
+                }
+                i++;
+            }
+            return -1;
         }
         static Foto DameFavorita(ListaFotos lista)
         {
@@ -74,6 +305,7 @@ internal class Program
             {
                 foto = lista.biblioteca[i];
                 if (foto.album == album)
+
                 {
                     pertenencientes[cont] = foto;
                     cont++;
@@ -93,7 +325,7 @@ internal class Program
         }
         static void Menu(ListaFotos nuevaLista, string input)
         {
-            
+
             if (input == "0")
             {
 
@@ -143,6 +375,55 @@ internal class Program
                 }
 
             }
+            else if (input == "5")
+            { // HACE FALTA PONER LAS RESPUESTAS
+                Foto f = DameFavorita(nuevaLista);
+                Console.WriteLine(f.fichero);
+            }
+            else if (input == "6")
+            {
+                Console.WriteLine("Introduzca el nombre del fichero que quiere dar un like");
+                string fichero = Console.ReadLine();
+                int res = HazLike(nuevaLista, fichero);
+                if (res == -1)
+                {
+                    Console.WriteLine("No se ha encontrado la foto en la lista");
+                }
+                else
+                {
+                    Console.WriteLine("Operacion efectuada con exito!");
+                }
+            }
+            else if (input == "7")
+            {
+                Console.WriteLine("Introduzca el nombre del fichero");
+                string fichero = Console.ReadLine();
+                int res = MuestraImagen(nuevaLista, fichero);
+                if (res == -1)
+                {
+                    Console.WriteLine("No se ha encontrado la foto en la lista");
+                }
+            }
+            else if (input == "8")
+            {
+                Console.WriteLine("Introduzca el nombre del fichero");
+                string fichero = Console.ReadLine();
+                int res = EliminaFoto(nuevaLista, fichero);
+                if (res == -1)
+                {
+                    Console.WriteLine("No se ha encontrado la foto en la lista");
+                }
+                else
+                {
+                    Console.WriteLine("Operacion efectuada con exito!");
+                }
+            }
+            else if (input == "9")
+            {
+                Console.WriteLine("Introduzca el nombre del fichero");
+                string fichero = Console.ReadLine();
+                SalvarLista(nuevaLista, fichero);
+            }
             else
             {
                 Console.WriteLine("Insercion incorrecta");
@@ -184,53 +465,27 @@ internal class Program
         }
         static void Main(string[] args)
         {
-            /*ListaFotos galeria = new ListaFotos(); // Comprobacion PASO 1
-            while (galeria.num < 3)
-            {
-                Console.WriteLine("Introduzca los datos de la foto separados por espacio (Nombre, Fecha, Album, Likes");
-                string linea = Console.ReadLine();
-                string[] trozos = linea.Split();
-                Foto f = new Foto();
-                f.fichero = trozos[0];
-                f.fecha = trozos[1];
-                f.album = trozos[2];
-                f.likes = Convert.ToInt32(trozos[3]);
-                galeria.biblioteca[galeria.num] = f;
-                galeria.num = galeria.num + 1;  
-            } 
-            
-            ListaFotos lista = new ListaFotos();
-            Foto f = new Foto();
-            string linea = "Fich 210 WAS 9";
-            string[] trozos = linea.Split();
-            f.fichero = trozos[0];
-            f.fecha = trozos[1];
-            f.album = trozos[2];
-            f.likes = Convert.ToInt32(trozos[3]);
-            lista.biblioteca[lista.num] = f;
-            lista.num = lista.num + 1;
-            linea = "Trr 821 Pdsa 4";
-            trozos = linea.Split();
-            f.fichero = trozos[0];
-            f.fecha = trozos[1];
-            f.album = trozos[2];
-            f.likes = Convert.ToInt32(trozos[3]);
-            lista.biblioteca[lista.num] = f;
-            EscribeFoto(f);
-            */
             ListaFotos generica = new ListaFotos();
             string input = "";
             while (input != "0")
             {
+                Task.Delay(1500);
+                Console.Clear();
+                Console.WriteLine("---------------------Terminal de Fotos----------------------------");
                 Console.WriteLine("Introduzca la accion que quiere realizar");
                 Console.WriteLine("0 - Salir del Programa");
                 Console.WriteLine("1 - Cargar una lista de fotos con los datos de un fichero cuyo nombre introduce el usuario por teclado");
                 Console.WriteLine("2 - Escribir en consola los datos de todas las fotos de la lista");
                 Console.WriteLine("3 - Escribir en consola los datos de las fotos pertenecientes a un álbum cuyo nombre introduce el usuario por teclado");
                 Console.WriteLine("4 - Añadir a la lista una foto cuyos datos introduce el usuario por teclado");
+                Console.WriteLine("5 - Mostrar en consola los datos de la foto favorita");
+                Console.WriteLine("6 - Sumar 1 al número de likes de la foto identificada con el nombre del fichero que contiene su imagen, que introduce el usuario por teclado");
+                Console.WriteLine("7 - Mostrar al usuario la imagen de la foto identificada con el nombre del fichero que contiene su imagen, que introduce el usuario por teclado");
+                Console.WriteLine("8 - Eliminar la foto identificada con el nombre del fichero que contiene su imagen,que introduce el usuario por teclado");
+                Console.WriteLine("9 - Salvar la lista de fotos en el fichero cuyo nombre introduce el usuario por teclado");
                 input = Console.ReadLine();
+                Console.Clear();
                 Menu(generica, input);
-
             }
         }
     }
