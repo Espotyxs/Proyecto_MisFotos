@@ -60,13 +60,11 @@
                                 double g = pixelActual.G;
                                 double b = pixelActual.B;
 
-                                r = r * 0.299f;
-                                g = g * 0.587f;
-                                b = b * 0.114f;
-                                int enteroR = Convert.ToInt32(r);
+                            int gris = Convert.ToInt32((r + g + b) / 3);
+                            int enteroR = Convert.ToInt32(r);
                                 int enteroG = Convert.ToInt32(g);
                                 int enteroB = Convert.ToInt32(b);
-                                imagen[i, j] = Color.FromArgb(enteroR, enteroG, enteroB);
+                                imagen[i, j] = Color.FromArgb(gris, gris, gris);
                             }
                         }
                     }
