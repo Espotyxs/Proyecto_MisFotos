@@ -17,7 +17,7 @@
         }
     internal class Program
         {
-            static void colorHaciaGris (ListaFotos lista, string nombreFichero)
+            static void colorHaciaGris (ListaFotos lista, string nombreFichero) //Pasa una imagen de color a una escala de grises
             {
                 try
                 {
@@ -78,7 +78,7 @@
                     Console.WriteLine("Formato de fichero incorrecto; Formato aceptado --> .JPG");
                 }
             }
-            static Bitmap CrearBitmap(Color[,] pixels)
+            static Bitmap CrearBitmap(Color[,] pixels) //Crea el bitmap de una imagen
             {
                 int ancho = pixels.GetLength(1);
                 int alto = pixels.GetLength(0);
@@ -101,7 +101,7 @@
                 imagen.Dispose();
             }
 
-            static void MuestraImagenPixels(Color[,] pixels)
+            static void MuestraImagenPixels(Color[,] pixels) //Muestra la imagen por pantalla
             {
                 int filas = pixels.GetLength(0);
                 int columnas = pixels.GetLength(1);
@@ -122,7 +122,7 @@
                 imagen.Dispose();
             }
 
-            static Color[,] CargaImagen(string nombreFichero)
+            static Color[,] CargaImagen(string nombreFichero) //Carga la imagen
             {
                 Bitmap imagen = new Bitmap(nombreFichero);
                 Color[,] pixels = new Color[imagen.Height, imagen.Width];
@@ -134,7 +134,7 @@
                 return pixels;
 
             }
-            static void SalvarLista(ListaFotos lista, string fichero)
+            static void SalvarLista(ListaFotos lista, string fichero) //Guarda la lista al PC
             {
                 try
                 {
@@ -174,7 +174,7 @@
                     Console.WriteLine("Fichero en formato incorrecto, formato aceptado --> .TXT");
                 }
             }
-            static int EliminaFoto(ListaFotos lista, string ficheroImagen)
+            static int EliminaFoto(ListaFotos lista, string ficheroImagen) //Elimina una foto de una lista; 0(Correcto); -1(No la ha encontrado)
             {
                 bool encontrado = false;
                 int i = 0;
@@ -207,7 +207,7 @@
                     return -1;
                 }
             }
-            static int MuestraImagen (ListaFotos lista, string ficheroImagen)
+            static int MuestraImagen (ListaFotos lista, string ficheroImagen)//Muestra la imagen por pantalla; 0(Correcto); -1(No encuentra la foto)
             {
                 bool encontrado = false;
                 int i = 0;
@@ -226,7 +226,7 @@
                 }
                 return -1;
             }
-            static int HazLike (ListaFotos lista, string ficheroImagen)
+            static int HazLike (ListaFotos lista, string ficheroImagen) //Añade +1 a la variable likes de una foto en especifico; 0(Correcto); -1(Si no encuentra al foto)
             {
                 bool encontrado = false;
                 int i = 0;
@@ -244,7 +244,7 @@
                 }
                 return -1;
             }
-            static Foto DameFavorita(ListaFotos lista)
+            static Foto DameFavorita(ListaFotos lista) //Hace una comparacion de todos los likes de todas las fotos de una lista y retorna la foto con mas likes
             {
                 int pos = 0;
                 int max = 0;
@@ -262,11 +262,11 @@
                 }
                 return f = lista.biblioteca[pos];
             }
-            static void EscribeFoto(Foto foto)
+            static void EscribeFoto(Foto foto)// Escribe la lista por pantalla
             {
                 Console.WriteLine("Fichero: "+foto.fichero +" Fecha: "+ foto.fecha +" Album: "+ foto.album + " Likes: " + foto.likes);
             }
-            static int PonFoto (ListaFotos lista, Foto foto)
+            static int PonFoto (ListaFotos lista, Foto foto) //Añade una foto a la lista; Return0(si la añade correctamente); -1(Si no cabe en la lista)
             {
                 try
                 {
@@ -279,9 +279,9 @@
                     return -1;
                 }
             }
-            static void EscribeLista (ListaFotos lista)
+            static void EscribeLista (ListaFotos lista) //Expone los objetos de una lista por pantalla
             {
-                if (lista == null)
+                if (lista == null || lista.num == 0)
             {
                 Console.Write("No hay elementos en la lista");
                 return;
@@ -296,7 +296,7 @@
                 }
             }
 
-            static ListaFotos DameFotosAlbum (ListaFotos lista, string album)
+            static ListaFotos DameFotosAlbum (ListaFotos lista, string album) //Expone al usuario las fotos de un album que especifica el user; Retorna una lista(Si encuentra fotos); Null(Si no encuentra fotos)
             {
                 Foto[] pertenencientes = new Foto[lista.biblioteca.Length];
                 int i = 0;
@@ -316,6 +316,7 @@
                 if (cont != 0)
                 {
                     ListaFotos filtrado = new ListaFotos();
+                    filtrado.num = cont;
                     filtrado.biblioteca = pertenencientes;
                     return filtrado;
                 }
@@ -324,7 +325,7 @@
                     return null;
                 }
             }
-            static void Menu(ListaFotos nuevaLista, string input)
+            static void Menu(ListaFotos nuevaLista, string input) //Menu de entrada del usuario
             {
 
                 if (input == "0")
@@ -344,6 +345,18 @@
                     {
                         Console.WriteLine("No hay espacio en la lista");
                     }
+                    if (e == -2)
+                    {
+                    Console.WriteLine("El fichero esta en formato incorrecto (Aceptado --> .txt");
+                    }
+                    if (e == -3)
+                    {
+                    Console.WriteLine("No se puede encontrar el fichero");
+                    }
+                    if (e == -4)
+                {
+                    Console.WriteLine("Error en el fichero o entrada incorrecta");
+                }
                 }
                 else if (input == "2")
                 {
@@ -435,7 +448,7 @@
                     Console.WriteLine("Insercion incorrecta");
                 }
             }
-            static int CargaLista (ListaFotos lista, string nombreFichero)
+            static int CargaLista (ListaFotos lista, string nombreFichero) //Carga una lista externa, devuelve 0 (Correcto); -1(No hay espacio); -3(No se encuentra el fichero); -2(Fichero en formato incorrecto)
             {
                 try
                 {
@@ -467,6 +480,10 @@
                 catch (FormatException)
                 {
                     return -2;
+                }
+                catch (NullReferenceException)
+                {
+                return -4;
                 }
             }
             static void Main(string[] args)
